@@ -5,9 +5,7 @@ import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement.js';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement.js';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement.js';
 import SVGElement from '../nodes/svg-element/SVGElement.js';
-import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement.js';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement.js';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement.js';
 import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement.js';
 import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement.js';
 import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement.js';
@@ -21,7 +19,6 @@ import HTMLButtonElement from '../nodes/html-button-element/HTMLButtonElement.js
 import HTMLAudioElement from '../nodes/html-audio-element/HTMLAudioElement.js';
 import HTMLVideoElement from '../nodes/html-video-element/HTMLVideoElement.js';
 import HTMLAnchorElement from '../nodes/html-anchor-element/HTMLAnchorElement.js';
-import HTMLIFrameElement from '../nodes/html-iframe-element/HTMLIFrameElement.js';
 
 export default {
 	A: HTMLAnchorElement,
@@ -41,9 +38,7 @@ export default {
 	FORM: HTMLFormElement,
 	INPUT: HTMLInputElement,
 	TEXTAREA: HTMLTextAreaElement,
-	SCRIPT: HTMLScriptElement,
 	IMG: HTMLImageElement,
-	LINK: HTMLLinkElement,
 	STYLE: HTMLStyleElement,
 	LABEL: HTMLLabelElement,
 	SLOT: HTMLSlotElement,
@@ -96,7 +91,6 @@ export default {
 	HR: HTMLElement,
 	HTML: HTMLElement,
 	I: HTMLElement,
-	IFRAME: HTMLIFrameElement,
 	INS: HTMLElement,
 	KBD: HTMLElement,
 	LEGEND: HTMLElement,

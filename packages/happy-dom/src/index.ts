@@ -4,9 +4,6 @@ import Window from './window/Window.js';
 import DataTransfer from './event/DataTransfer.js';
 import DataTransferItem from './event/DataTransferItem.js';
 import DataTransferItemList from './event/DataTransferItemList.js';
-import { URLSearchParams } from 'url';
-import URL from './url/URL.js';
-import Location from './location/Location.js';
 import MutationObserver from './mutation-observer/MutationObserver.js';
 import MutationRecord from './mutation-observer/MutationRecord.js';
 import ResizeObserver from './resize-observer/ResizeObserver.js';
@@ -70,9 +67,6 @@ import IHTMLTextAreaElement from './nodes/html-text-area-element/IHTMLTextAreaEl
 import HTMLImageElement from './nodes/html-image-element/HTMLImageElement.js';
 import IHTMLImageElement from './nodes/html-image-element/IHTMLImageElement.js';
 import Image from './nodes/html-image-element/Image.js';
-import HTMLScriptElement from './nodes/html-script-element/HTMLScriptElement.js';
-import HTMLLinkElement from './nodes/html-link-element/HTMLLinkElement.js';
-import IHTMLLinkElement from './nodes/html-link-element/IHTMLLinkElement.js';
 import HTMLStyleElement from './nodes/html-style-element/HTMLStyleElement.js';
 import IHTMLStyleElement from './nodes/html-style-element/IHTMLStyleElement.js';
 import HTMLSlotElement from './nodes/html-slot-element/HTMLSlotElement.js';
@@ -89,8 +83,6 @@ import HTMLVideoElement from './nodes/html-video-element/HTMLVideoElement.js';
 import IHTMLVideoElement from './nodes/html-video-element/IHTMLVideoElement.js';
 import HTMLBaseElement from './nodes/html-base-element/HTMLBaseElement.js';
 import IHTMLBaseElement from './nodes/html-base-element/IHTMLBaseElement.js';
-import HTMLIFrameElement from './nodes/html-iframe-element/HTMLIFrameElement.js';
-import IHTMLIFrameElement from './nodes/html-iframe-element/IHTMLIFrameElement.js';
 import SVGElement from './nodes/svg-element/SVGElement.js';
 import ISVGElement from './nodes/svg-element/ISVGElement.js';
 import SVGGraphicsElement from './nodes/svg-element/SVGGraphicsElement.js';
@@ -136,14 +128,6 @@ import ProcessingInstruction from './nodes/processing-instruction/ProcessingInst
 import IProcessingInstruction from './nodes/processing-instruction/IProcessingInstruction.js';
 import FileList from './nodes/html-input-element/FileList.js';
 import IFileList from './nodes/html-input-element/IFileList.js';
-import AbortController from './fetch/AbortController.js';
-import AbortSignal from './fetch/AbortSignal.js';
-import Request from './fetch/Request.js';
-import IRequest from './fetch/types/IRequest.js';
-import Response from './fetch/Response.js';
-import IResponse from './fetch/types/IResponse.js';
-import Headers from './fetch/Headers.js';
-import IHeaders from './fetch/types/IHeaders.js';
 import FormData from './form-data/FormData.js';
 import EventPhaseEnum from './event/EventPhaseEnum.js';
 import VirtualConsoleLogLevelEnum from './console/enums/VirtualConsoleLogLevelEnum.js';
@@ -167,8 +151,6 @@ export {
 	DataTransfer,
 	DataTransferItem,
 	DataTransferItemList,
-	URL,
-	Location,
 	MutationObserver,
 	MutationRecord,
 	ResizeObserver,
@@ -234,9 +216,6 @@ export {
 	HTMLImageElement,
 	IHTMLImageElement,
 	Image,
-	HTMLScriptElement,
-	HTMLLinkElement,
-	IHTMLLinkElement,
 	HTMLStyleElement,
 	IHTMLStyleElement,
 	HTMLSlotElement,
@@ -253,8 +232,6 @@ export {
 	IHTMLVideoElement,
 	HTMLBaseElement,
 	IHTMLBaseElement,
-	HTMLIFrameElement,
-	IHTMLIFrameElement,
 	SVGElement,
 	ISVGElement,
 	SVGGraphicsElement,
@@ -290,7 +267,6 @@ export {
 	CSSSupportsRule,
 	Storage,
 	DOMRect,
-	URLSearchParams,
 	Selection,
 	Range,
 	HTMLDialogElement,
@@ -301,14 +277,6 @@ export {
 	IProcessingInstruction,
 	FileList,
 	IFileList,
-	AbortController,
-	AbortSignal,
-	Request,
-	IRequest,
-	Response,
-	IResponse,
-	Headers,
-	IHeaders,
 	FormData,
 	EventPhaseEnum,
 	VirtualConsoleLogLevelEnum,

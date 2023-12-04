@@ -24,6 +24,22 @@ The goal of [Happy DOM](https://github.com/capricorn86/happy-dom) is to emulate 
 
 And much more..
 
+#### Removals
+
+For unhappy-dom, we remove:
+
+- URL
+- Location
+- postMessage
+- Cookies
+- Fetch (therefore also AbortController, Request, Response, etc.)
+- HTMLIFrameElement
+- HTMLLinkElement
+- HTMLScriptElement
+- VM
+- XHR
+- v8 methods like gc()
+
 ### Works With
 
 - [Google LitHTML](https://lit-html.polymer-project.org)

@@ -2,9 +2,7 @@ import IDocument from '../nodes/document/IDocument.js';
 import VoidElements from '../config/VoidElements.js';
 import UnnestableElements from '../config/UnnestableElements.js';
 import NamespaceURI from '../config/NamespaceURI.js';
-import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement.js';
 import IElement from '../nodes/element/IElement.js';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement.js';
 import PlainTextElements from '../config/PlainTextElements.js';
 import IDocumentType from '../nodes/document-type/IDocumentType.js';
 import INode from '../nodes/node/INode.js';
@@ -77,7 +75,7 @@ export default class XMLParser {
 		const root = options && options.rootNode ? options.rootNode : document.createDocumentFragment();
 		const stack: INode[] = [root];
 		const markupRegexp = new RegExp(MARKUP_REGEXP, 'gm');
-		const { evaluateScripts = false } = options || {};
+		const {} = options || {};
 		const unnestableTagNames: string[] = [];
 		let currentNode: INode | null = root;
 		let match: RegExpExecArray;
@@ -281,16 +279,6 @@ export default class XMLParser {
 					case MarkupReadStateEnum.plainTextContent:
 						if (match[2] && match[2].toUpperCase() === plainTextTagName) {
 							// End of plain text tag.
-
-							// Scripts are not allowed to be executed when they are parsed using innerHTML, outerHTML, replaceWith() etc.
-							// However, they are allowed to be executed when document.write() is used.
-							// See: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement
-							if (plainTextTagName === 'SCRIPT') {
-								(<HTMLScriptElement>currentNode)._evaluateScript = evaluateScripts;
-							} else if (plainTextTagName === 'LINK') {
-								// An assumption that the same rule should be applied for the HTMLLinkElement is made here.
-								(<HTMLLinkElement>currentNode)._evaluateCSS = evaluateScripts;
-							}
 
 							// Plain text elements such as <script> and <style> should only contain text.
 							currentNode.appendChild(

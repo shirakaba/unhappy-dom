@@ -15,7 +15,6 @@ import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement.js';
 import HTMLSelectElement from '../nodes/html-select-element/HTMLSelectElement.js';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement.js';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement.js';
 import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement.js';
 import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement.js';
 import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement.js';
@@ -24,10 +23,8 @@ import HTMLMediaElement from '../nodes/html-media-element/HTMLMediaElement.js';
 import HTMLAudioElement from '../nodes/html-audio-element/HTMLAudioElement.js';
 import HTMLVideoElement from '../nodes/html-video-element/HTMLVideoElement.js';
 import HTMLBaseElement from '../nodes/html-base-element/HTMLBaseElement.js';
-import HTMLIFrameElement from '../nodes/html-iframe-element/HTMLIFrameElement.js';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement.js';
 import SVGElement from '../nodes/svg-element/SVGElement.js';
-import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement.js';
 import HTMLDialogElement from '../nodes/html-dialog-element/HTMLDialogElement.js';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement.js';
 import Image from '../nodes/html-image-element/Image.js';
@@ -42,9 +39,6 @@ import KeyboardEvent from '../event/events/KeyboardEvent.js';
 import ProgressEvent from '../event/events/ProgressEvent.js';
 import MediaQueryListEvent from '../event/events/MediaQueryListEvent.js';
 import EventTarget from '../event/EventTarget.js';
-import { URLSearchParams } from 'url';
-import URL from '../url/URL.js';
-import Location from '../location/Location.js';
 import MutationObserver from '../mutation-observer/MutationObserver.js';
 import MutationRecord from '../mutation-observer/MutationRecord.js';
 import DOMParser from '../dom-parser/DOMParser.js';
@@ -95,16 +89,8 @@ import MimeType from '../navigator/MimeType.js';
 import MimeTypeArray from '../navigator/MimeTypeArray.js';
 import Plugin from '../navigator/Plugin.js';
 import PluginArray from '../navigator/PluginArray.js';
-import IResponseInit from '../fetch/types/IResponseInit.js';
-import IRequest from '../fetch/types/IRequest.js';
-import IHeaders from '../fetch/types/IHeaders.js';
-import IRequestInit from '../fetch/types/IRequestInit.js';
-import IResponse from '../fetch/types/IResponse.js';
 import Range from '../range/Range.js';
 import MediaQueryList from '../match-media/MediaQueryList.js';
-import XMLHttpRequest from '../xml-http-request/XMLHttpRequest.js';
-import XMLHttpRequestUpload from '../xml-http-request/XMLHttpRequestUpload.js';
-import XMLHttpRequestEventTarget from '../xml-http-request/XMLHttpRequestEventTarget.js';
 import DOMRect from '../nodes/element/DOMRect.js';
 import Window from './Window.js';
 import Attr from '../nodes/attr/Attr.js';
@@ -113,16 +99,10 @@ import { Performance } from 'perf_hooks';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
 import IHappyDOMSettings from './IHappyDOMSettings.js';
-import RequestInfo from '../fetch/types/IRequestInfo.js';
 import FileList from '../nodes/html-input-element/FileList.js';
 import Stream from 'stream';
 import { webcrypto } from 'crypto';
 import FormData from '../form-data/FormData.js';
-import AbortController from '../fetch/AbortController.js';
-import AbortSignal from '../fetch/AbortSignal.js';
-import IResponseBody from '../fetch/types/IResponseBody.js';
-import IRequestInfo from '../fetch/types/IRequestInfo.js';
-import IHeadersInit from '../fetch/types/IHeadersInit.js';
 import RadioNodeList from '../nodes/html-form-element/RadioNodeList.js';
 import ValidityState from '../validity-state/ValidityState.js';
 import INodeJSGlobal from './INodeJSGlobal.js';
@@ -143,7 +123,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 		cancelAsync: () => void;
 		asyncTaskManager: AsyncTaskManager;
 		setWindowSize: (options: { width?: number; height?: number }) => void;
-		setURL: (url: string) => void;
 		virtualConsolePrinter: VirtualConsolePrinter | null;
 		settings: IHappyDOMSettings;
 
@@ -184,8 +163,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly HTMLSelectElement: typeof HTMLSelectElement;
 	readonly HTMLTextAreaElement: typeof HTMLTextAreaElement;
 	readonly HTMLImageElement: typeof HTMLImageElement;
-	readonly HTMLScriptElement: typeof HTMLScriptElement;
-	readonly HTMLLinkElement: typeof HTMLLinkElement;
 	readonly HTMLStyleElement: typeof HTMLStyleElement;
 	readonly HTMLSlotElement: typeof HTMLSlotElement;
 	readonly HTMLLabelElement: typeof HTMLLabelElement;
@@ -194,7 +171,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly HTMLAudioElement: typeof HTMLAudioElement;
 	readonly HTMLVideoElement: typeof HTMLVideoElement;
 	readonly HTMLBaseElement: typeof HTMLBaseElement;
-	readonly HTMLIFrameElement: typeof HTMLIFrameElement;
 	readonly HTMLDialogElement: typeof HTMLDialogElement;
 
 	/**
@@ -213,7 +189,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly HTMLMenuElement: typeof HTMLElement;
 	readonly HTMLDListElement: typeof HTMLElement;
 	readonly HTMLDivElement: typeof HTMLElement;
-	readonly HTMLAnchorElement: typeof HTMLElement;
 	readonly HTMLAreaElement: typeof HTMLElement;
 	readonly HTMLBRElement: typeof HTMLElement;
 	readonly HTMLButtonElement: typeof HTMLElement;
@@ -321,9 +296,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly DataTransfer: typeof DataTransfer;
 	readonly DataTransferItem: typeof DataTransferItem;
 	readonly DataTransferItemList: typeof DataTransferItemList;
-	readonly URL: typeof URL;
-	readonly URLSearchParams: typeof URLSearchParams;
-	readonly Location: typeof Location;
 	readonly CustomElementRegistry: typeof CustomElementRegistry;
 	readonly Window: typeof Window;
 	readonly XMLSerializer: typeof XMLSerializer;
@@ -355,22 +327,12 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly MimeTypeArray: typeof MimeTypeArray;
 	readonly Plugin: typeof Plugin;
 	readonly PluginArray: typeof PluginArray;
-	readonly Headers: { new (init?: IHeadersInit): IHeaders };
-	readonly Request: {
-		new (input: IRequestInfo, init?: IRequestInit): IRequest;
-	};
-	readonly Response: { new (body?: IResponseBody | null, init?: IResponseInit): IResponse };
 	readonly Range: typeof Range;
 	readonly DOMRect: typeof DOMRect;
-	readonly XMLHttpRequest: typeof XMLHttpRequest;
-	readonly XMLHttpRequestUpload: typeof XMLHttpRequestUpload;
-	readonly XMLHttpRequestEventTarget: typeof XMLHttpRequestEventTarget;
 	readonly FileList: typeof FileList;
 	readonly ReadableStream: typeof Stream.Readable;
 	readonly WritableStream: typeof Stream.Writable;
 	readonly FormData: typeof FormData;
-	readonly AbortController: typeof AbortController;
-	readonly AbortSignal: typeof AbortSignal;
 	readonly RadioNodeList: typeof RadioNodeList;
 	readonly ValidityState: typeof ValidityState;
 	readonly Permissions: typeof Permissions;
@@ -393,7 +355,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	// Public Properties
 	readonly document: Document;
 	readonly customElements: CustomElementRegistry;
-	readonly location: Location;
 	readonly history: History;
 	readonly navigator: Navigator;
 	readonly console: Console;
@@ -505,15 +466,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	cancelAnimationFrame(id: NodeJS.Immediate): void;
 
 	/**
-	 * This method provides an easy, logical way to fetch resources asynchronously across the network.
-	 *
-	 * @param url URL.
-	 * @param [init] Init.
-	 * @returns Promise.
-	 */
-	fetch(url: RequestInfo, init?: IRequestInit): Promise<IResponse>;
-
-	/**
 	 * Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).
 	 *
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/btoa
@@ -532,12 +484,4 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	 * @returns An ASCII string containing decoded data from encodedData.
 	 */
 	atob(data: unknown): string;
-
-	/**
-	 * Safely enables cross-origin communication between Window objects; e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
-	 *
-	 * @param message Message.
-	 * @param listener Listener.
-	 */
-	postMessage(message: unknown, targetOrigin?: string, transfer?: unknown[]): void;
 }

@@ -16,7 +16,6 @@ import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement.js';
 import HTMLSelectElement from '../nodes/html-select-element/HTMLSelectElement.js';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement.js';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement.js';
 import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement.js';
 import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement.js';
 import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement.js';
@@ -26,12 +25,10 @@ import HTMLAudioElement from '../nodes/html-audio-element/HTMLAudioElement.js';
 import AudioImplementation from '../nodes/html-audio-element/Audio.js';
 import HTMLVideoElement from '../nodes/html-video-element/HTMLVideoElement.js';
 import HTMLBaseElement from '../nodes/html-base-element/HTMLBaseElement.js';
-import HTMLIFrameElement from '../nodes/html-iframe-element/HTMLIFrameElement.js';
 import HTMLDialogElement from '../nodes/html-dialog-element/HTMLDialogElement.js';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement.js';
 import SVGElement from '../nodes/svg-element/SVGElement.js';
 import SVGGraphicsElement from '../nodes/svg-element/SVGGraphicsElement.js';
-import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement.js';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement.js';
 import ImageImplementation from '../nodes/html-image-element/Image.js';
 import DocumentFragmentImplementation from '../nodes/document-fragment/DocumentFragment.js';
@@ -47,9 +44,6 @@ import ProgressEvent from '../event/events/ProgressEvent.js';
 import MediaQueryListEvent from '../event/events/MediaQueryListEvent.js';
 import EventTarget from '../event/EventTarget.js';
 import MessagePort from '../event/MessagePort.js';
-import { URLSearchParams } from 'url';
-import URL from '../url/URL.js';
-import Location from '../location/Location.js';
 import MutationObserver from '../mutation-observer/MutationObserver.js';
 import MutationRecord from '../mutation-observer/MutationRecord.js';
 import DOMParserImplementation from '../dom-parser/DOMParser.js';
@@ -86,15 +80,6 @@ import StorageEvent from '../event/events/StorageEvent.js';
 import SubmitEvent from '../event/events/SubmitEvent.js';
 import Screen from '../screen/Screen.js';
 import AsyncTaskManager from '../async-task-manager/AsyncTaskManager.js';
-import IResponse from '../fetch/types/IResponse.js';
-import IResponseInit from '../fetch/types/IResponseInit.js';
-import IRequest from '../fetch/types/IRequest.js';
-import IRequestInit from '../fetch/types/IRequestInit.js';
-import IHeaders from '../fetch/types/IHeaders.js';
-import IHeadersInit from '../fetch/types/IHeadersInit.js';
-import Headers from '../fetch/Headers.js';
-import RequestImplementation from '../fetch/Request.js';
-import ResponseImplementation from '../fetch/Response.js';
 import Storage from '../storage/Storage.js';
 import IWindow from './IWindow.js';
 import HTMLCollection from '../nodes/element/HTMLCollection.js';
@@ -107,32 +92,20 @@ import MimeType from '../navigator/MimeType.js';
 import MimeTypeArray from '../navigator/MimeTypeArray.js';
 import Plugin from '../navigator/Plugin.js';
 import PluginArray from '../navigator/PluginArray.js';
-import Fetch from '../fetch/Fetch.js';
 import RangeImplementation from '../range/Range.js';
 import DOMRect from '../nodes/element/DOMRect.js';
-import VMGlobalPropertyScript from './VMGlobalPropertyScript.js';
 import * as PerfHooks from 'perf_hooks';
-import VM from 'vm';
 import { Buffer } from 'buffer';
 import { webcrypto } from 'crypto';
-import XMLHttpRequestImplementation from '../xml-http-request/XMLHttpRequest.js';
-import XMLHttpRequestUpload from '../xml-http-request/XMLHttpRequestUpload.js';
-import XMLHttpRequestEventTarget from '../xml-http-request/XMLHttpRequestEventTarget.js';
 import Base64 from '../base64/Base64.js';
 import IDocument from '../nodes/document/IDocument.js';
 import Attr from '../nodes/attr/Attr.js';
 import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
-import RequestInfo from '../fetch/types/IRequestInfo.js';
 import FileList from '../nodes/html-input-element/FileList.js';
 import Stream from 'stream';
 import FormData from '../form-data/FormData.js';
-import AbortController from '../fetch/AbortController.js';
-import AbortSignal from '../fetch/AbortSignal.js';
-import IResponseBody from '../fetch/types/IResponseBody.js';
-import IRequestInfo from '../fetch/types/IRequestInfo.js';
-import DOMExceptionNameEnum from '../exception/DOMExceptionNameEnum.js';
 import IHappyDOMOptions from './IHappyDOMOptions.js';
 import RadioNodeList from '../nodes/html-form-element/RadioNodeList.js';
 import ValidityState from '../validity-state/ValidityState.js';
@@ -166,7 +139,6 @@ export default class Window extends EventTarget implements IWindow {
 		cancelAsync: () => void;
 		asyncTaskManager: AsyncTaskManager;
 		setWindowSize: (options: { width?: number; height?: number }) => void;
-		setURL: (url: string) => void;
 		virtualConsolePrinter: VirtualConsolePrinter | null;
 		settings: IHappyDOMSettings;
 
@@ -206,9 +178,6 @@ export default class Window extends EventTarget implements IWindow {
 			}
 		},
 		virtualConsolePrinter: null,
-		setURL: (url: string) => {
-			this.location.href = url;
-		},
 		settings: {
 			disableJavaScriptEvaluation: false,
 			disableJavaScriptFileLoading: false,
@@ -257,8 +226,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly HTMLSelectElement = HTMLSelectElement;
 	public readonly HTMLTextAreaElement = HTMLTextAreaElement;
 	public readonly HTMLImageElement = HTMLImageElement;
-	public readonly HTMLScriptElement = HTMLScriptElement;
-	public readonly HTMLLinkElement = HTMLLinkElement;
 	public readonly HTMLStyleElement = HTMLStyleElement;
 	public readonly HTMLLabelElement = HTMLLabelElement;
 	public readonly HTMLSlotElement = HTMLSlotElement;
@@ -267,7 +234,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly HTMLAudioElement = HTMLAudioElement;
 	public readonly HTMLVideoElement = HTMLVideoElement;
 	public readonly HTMLBaseElement = HTMLBaseElement;
-	public readonly HTMLIFrameElement = HTMLIFrameElement;
 	public readonly HTMLDialogElement = HTMLDialogElement;
 
 	// Non-implemented element classes
@@ -284,7 +250,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly HTMLMenuElement = HTMLElement;
 	public readonly HTMLDListElement = HTMLElement;
 	public readonly HTMLDivElement = HTMLElement;
-	public readonly HTMLAnchorElement = HTMLElement;
 	public readonly HTMLAreaElement = HTMLElement;
 	public readonly HTMLBRElement = HTMLElement;
 	public readonly HTMLButtonElement = HTMLElement;
@@ -394,8 +359,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly DataTransfer = DataTransfer;
 	public readonly DataTransferItem = DataTransferItem;
 	public readonly DataTransferItemList = DataTransferItemList;
-	public readonly URL = URL;
-	public readonly Location = Location;
 	public readonly CustomElementRegistry = CustomElementRegistry;
 	public readonly Window = <typeof Window>this.constructor;
 	public readonly XMLSerializer = XMLSerializer;
@@ -407,7 +370,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly History = History;
 	public readonly Screen = Screen;
 	public readonly Storage = Storage;
-	public readonly URLSearchParams = URLSearchParams;
 	public readonly HTMLCollection = HTMLCollection;
 	public readonly HTMLFormControlsCollection = HTMLFormControlsCollection;
 	public readonly NodeList = NodeList;
@@ -427,29 +389,17 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly Plugin = Plugin;
 	public readonly PluginArray = PluginArray;
 	public readonly FileList = FileList;
-	public readonly Headers: { new (init?: IHeadersInit): IHeaders } = Headers;
 	public readonly DOMRect: typeof DOMRect;
 	public readonly RadioNodeList: typeof RadioNodeList;
 	public readonly ValidityState: typeof ValidityState;
-	public readonly Request: {
-		new (input: IRequestInfo, init?: IRequestInit): IRequest;
-	};
-	public readonly Response: {
-		new (body?: IResponseBody, init?: IResponseInit): IResponse;
-	};
-	public readonly XMLHttpRequestUpload = XMLHttpRequestUpload;
-	public readonly XMLHttpRequestEventTarget = XMLHttpRequestEventTarget;
 	public readonly ReadableStream = Stream.Readable;
 	public readonly WritableStream = Stream.Writable;
 	public readonly TransformStream = Stream.Transform;
-	public readonly AbortController = AbortController;
-	public readonly AbortSignal = AbortSignal;
 	public readonly FormData = FormData;
 	public readonly Permissions = Permissions;
 	public readonly PermissionStatus = PermissionStatus;
 	public readonly Clipboard = Clipboard;
 	public readonly ClipboardItem = ClipboardItem;
-	public readonly XMLHttpRequest;
 	public readonly DOMParser: typeof DOMParserImplementation;
 	public readonly Range;
 	public readonly FileReader;
@@ -465,7 +415,6 @@ export default class Window extends EventTarget implements IWindow {
 	// Public properties.
 	public readonly document: Document;
 	public readonly customElements: CustomElementRegistry;
-	public readonly location: Location;
 	public readonly history: History;
 	public readonly navigator: Navigator;
 	public readonly console: Console;
@@ -574,7 +523,6 @@ export default class Window extends EventTarget implements IWindow {
 		super();
 
 		this.customElements = new CustomElementRegistry();
-		this.location = new Location();
 		this.navigator = new Navigator(this);
 		this.history = new History();
 		this.screen = new Screen();
@@ -596,10 +544,6 @@ export default class Window extends EventTarget implements IWindow {
 			} else if (options.innerHeight !== undefined) {
 				this.innerHeight = options.innerHeight;
 				this.outerHeight = options.innerHeight;
-			}
-
-			if (options.url !== undefined) {
-				this.location.href = options.url;
 			}
 
 			if (options.settings) {
@@ -655,22 +599,13 @@ export default class Window extends EventTarget implements IWindow {
 		// We need to set the correct owner document when the class is constructed.
 		// To achieve this we will extend the original implementation with a class that sets the owner document.
 
-		ResponseImplementation._ownerDocument = document;
-		RequestImplementation._ownerDocument = document;
 		ImageImplementation._ownerDocument = document;
 		DocumentFragmentImplementation._ownerDocument = document;
 		FileReaderImplementation._ownerDocument = document;
 		DOMParserImplementation._ownerDocument = document;
 		RangeImplementation._ownerDocument = document;
-		XMLHttpRequestImplementation._ownerDocument = document;
 
 		/* eslint-disable jsdoc/require-jsdoc */
-		class Response extends ResponseImplementation {
-			public static _ownerDocument: IDocument = document;
-		}
-		class Request extends RequestImplementation {
-			public static _ownerDocument: IDocument = document;
-		}
 		class Image extends ImageImplementation {
 			public static _ownerDocument: IDocument = document;
 		}
@@ -683,9 +618,6 @@ export default class Window extends EventTarget implements IWindow {
 		class DOMParser extends DOMParserImplementation {
 			public static _ownerDocument: IDocument = document;
 		}
-		class XMLHttpRequest extends XMLHttpRequestImplementation {
-			public static _ownerDocument: IDocument = document;
-		}
 		class Range extends RangeImplementation {
 			public static _ownerDocument: IDocument = document;
 		}
@@ -694,17 +626,12 @@ export default class Window extends EventTarget implements IWindow {
 		}
 		/* eslint-enable jsdoc/require-jsdoc */
 
-		this.Response = Response;
-		this.Request = Request;
 		this.Image = Image;
 		this.DocumentFragment = DocumentFragment;
 		this.FileReader = FileReader;
 		this.DOMParser = DOMParser;
-		this.XMLHttpRequest = XMLHttpRequest;
 		this.Range = Range;
 		this.Audio = Audio;
-
-		this._setupVMContext();
 
 		this.document._onWindowReady();
 	}
@@ -943,17 +870,6 @@ export default class Window extends EventTarget implements IWindow {
 	}
 
 	/**
-	 * This method provides an easy, logical way to fetch resources asynchronously across the network.
-	 *
-	 * @param url URL.
-	 * @param [init] Init.
-	 * @returns Promise.
-	 */
-	public async fetch(url: RequestInfo, init?: IRequestInit): Promise<IResponse> {
-		return await new Fetch({ ownerDocument: this.document, url, init }).send();
-	}
-
-	/**
 	 * Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).
 	 *
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/btoa
@@ -975,56 +891,5 @@ export default class Window extends EventTarget implements IWindow {
 	 */
 	public atob(data: unknown): string {
 		return Base64.atob(data);
-	}
-
-	/**
-	 * Safely enables cross-origin communication between Window objects; e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.
-	 *
-	 * @param message Message.
-	 * @param [targetOrigin=*] Target origin.
-	 * @param _transfer Transfer. Not implemented.
-	 */
-	public postMessage(message: unknown, targetOrigin = '*', _transfer?: unknown[]): void {
-		// TODO: Implement transfer.
-
-		if (targetOrigin && targetOrigin !== '*' && this.location.origin !== targetOrigin) {
-			throw new DOMException(
-				`Failed to execute 'postMessage' on 'Window': The target origin provided ('${targetOrigin}') does not match the recipient window\'s origin ('${this.location.origin}').`,
-				DOMExceptionNameEnum.securityError
-			);
-		}
-
-		try {
-			JSON.stringify(message);
-		} catch (error) {
-			throw new DOMException(
-				`Failed to execute 'postMessage' on 'Window': The provided message cannot be serialized.`,
-				DOMExceptionNameEnum.invalidStateError
-			);
-		}
-
-		this.window.setTimeout(() =>
-			this.dispatchEvent(
-				new MessageEvent('message', {
-					data: message,
-					origin: this.parent.location.origin,
-					source: this.parent,
-					lastEventId: ''
-				})
-			)
-		);
-	}
-
-	/**
-	 * Setup of VM context.
-	 */
-	protected _setupVMContext(): void {
-		if (!VM.isContext(this)) {
-			VM.createContext(this);
-
-			// Sets global properties from the VM to the Window object.
-			// Otherwise "this.Array" will be undefined for example.
-			VMGlobalPropertyScript.runInContext(this);
-		}
 	}
 }

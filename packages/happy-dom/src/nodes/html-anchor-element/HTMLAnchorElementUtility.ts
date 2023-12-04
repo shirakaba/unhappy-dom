@@ -1,5 +1,4 @@
 import IDocument from '../document/IDocument.js';
-import URL from '../../url/URL.js';
 
 /**
  * HTML Anchor Element utility.
@@ -26,23 +25,11 @@ export default class HTMLAnchorElementUtility {
 	 *
 	 * @see https://html.spec.whatwg.org/multipage/links.html#dom-hyperlink-href
 	 * @see https://html.spec.whatwg.org/multipage/links.html#hyperlink
-	 * @param document Document.
-	 * @param href Href.
+	 * @param _document Document.
+	 * @param _href Href.
 	 * @returns URL.
 	 */
-	public static getUrl(document: IDocument, href: string | null): URL {
-		if (!href) {
-			return null;
-		}
-
-		const documentUrl = document.location.href;
-
-		try {
-			return new URL(href.trim(), documentUrl);
-		} catch (TypeError) {
-			// Ignore error
-		}
-
+	public static getUrl(_document: IDocument, _href: string | null): URL | null {
 		return null;
 	}
 }

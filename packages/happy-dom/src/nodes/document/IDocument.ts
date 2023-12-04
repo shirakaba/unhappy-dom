@@ -14,9 +14,7 @@ import ICharacterData from '../character-data/ICharacterData.js';
 import IDocumentFragment from '../document-fragment/IDocumentFragment.js';
 import Selection from '../../selection/Selection.js';
 import IHTMLCollection from '../element/IHTMLCollection.js';
-import IHTMLScriptElement from '../html-script-element/IHTMLScriptElement.js';
 import CSSStyleSheet from '../../css/CSSStyleSheet.js';
-import Location from '../../location/Location.js';
 import DocumentReadyStateEnum from './DocumentReadyStateEnum.js';
 import INodeList from '../node/INodeList.js';
 import Range from '../../range/Range.js';
@@ -33,11 +31,11 @@ export default interface IDocument extends IParentNode {
 	readonly doctype: IDocumentType;
 	readonly body: IHTMLElement;
 	readonly head: IHTMLElement;
-	readonly scripts: IHTMLCollection<IHTMLScriptElement>;
+	readonly scripts: IHTMLCollection<never>;
 	readonly activeElement: IHTMLElement;
 	readonly styleSheets: CSSStyleSheet[];
 	readonly scrollingElement: IHTMLElement;
-	readonly location: Location;
+	readonly location: never;
 	readonly readyState: DocumentReadyStateEnum;
 	readonly charset: string;
 	readonly characterSet: string;
@@ -47,7 +45,7 @@ export default interface IDocument extends IParentNode {
 	readonly hidden: boolean;
 	readonly links: IHTMLCollection<IHTMLElement>;
 	readonly referrer: string;
-	readonly currentScript: IHTMLScriptElement;
+	readonly currentScript: null;
 	cookie: string;
 	title: string;
 

@@ -18,7 +18,7 @@ export default class HTMLBaseElement extends HTMLElement implements IHTMLBaseEle
 		if (href !== null) {
 			return href;
 		}
-		return this.ownerDocument.location.href;
+		return '';
 	}
 
 	/**

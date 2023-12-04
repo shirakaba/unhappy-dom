@@ -212,7 +212,7 @@ export default class Node extends EventTarget implements INode {
 		if (base) {
 			return base.href;
 		}
-		return this.ownerDocument.defaultView.location.href;
+		return '';
 	}
 
 	/**

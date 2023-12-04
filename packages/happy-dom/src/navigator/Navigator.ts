@@ -216,18 +216,14 @@ export default class Navigator {
 	/**
 	 * Sends an HTTP POST request containing a small amount of data to a web server.
 	 *
-	 * @param url URL.
-	 * @param data Data.
+	 * @param _url URL.
+	 * @param _data Data.
 	 * @returns "true" if the user agent successfully queued the data for transfer. Otherwise, it returns "false".
 	 */
 	public sendBeacon(
-		url: string,
-		data: string | Blob | ArrayBuffer | ArrayBufferView | FormData
+		_url: string,
+		_data: string | Blob | ArrayBuffer | ArrayBufferView | FormData
 	): boolean {
-		this.#ownerWindow.fetch(url, {
-			method: 'POST',
-			body: data
-		});
 		return true;
 	}
 

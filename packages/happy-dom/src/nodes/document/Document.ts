@@ -20,9 +20,7 @@ import QuerySelector from '../../query-selector/QuerySelector.js';
 import IDocument from './IDocument.js';
 import CSSStyleSheet from '../../css/CSSStyleSheet.js';
 import DOMException from '../../exception/DOMException.js';
-import CookieJar from '../../cookie/CookieJar.js';
 import IElement from '../element/IElement.js';
-import IHTMLScriptElement from '../html-script-element/IHTMLScriptElement.js';
 import IHTMLElement from '../html-element/IHTMLElement.js';
 import IDocumentType from '../document-type/IDocumentType.js';
 import INode from '../node/INode.js';
@@ -32,11 +30,9 @@ import IDocumentFragment from '../document-fragment/IDocumentFragment.js';
 import INodeList from '../node/INodeList.js';
 import NodeList from '../node/NodeList.js';
 import IHTMLCollection from '../element/IHTMLCollection.js';
-import IHTMLLinkElement from '../html-link-element/IHTMLLinkElement.js';
 import IHTMLStyleElement from '../html-style-element/IHTMLStyleElement.js';
 import DocumentReadyStateEnum from './DocumentReadyStateEnum.js';
 import DocumentReadyStateManager from './DocumentReadyStateManager.js';
-import Location from '../../location/Location.js';
 import Selection from '../../selection/Selection.js';
 import IShadowRoot from '../shadow-root/IShadowRoot.js';
 import Range from '../../range/Range.js';
@@ -69,12 +65,10 @@ export default class Document extends Node implements IDocument {
 	public readonly _children: IHTMLCollection<IElement> = new HTMLCollection<IElement>();
 	public _activeElement: IHTMLElement = null;
 	public _nextActiveElement: IHTMLElement = null;
-	public _currentScript: IHTMLScriptElement = null;
+	public _currentScript = null;
 
 	// Used as an unique identifier which is updated whenever the DOM gets modified.
 	public _cacheID = 0;
-	// Public in order to be accessible by the fetch and xhr.
-	public _cookie = new CookieJar();
 
 	protected _isFirstWrite = true;
 	protected _isFirstWriteAfterOpen = false;
@@ -313,17 +307,15 @@ export default class Document extends Node implements IDocument {
 	 * @returns Cookie.
 	 */
 	public get cookie(): string {
-		return this._cookie.getCookieString(this.defaultView.location, true);
+		return '';
 	}
 
 	/**
 	 * Sets a cookie string.
 	 *
-	 * @param cookie Cookie string.
+	 * @param _cookie Cookie string.
 	 */
-	public set cookie(cookie: string) {
-		this._cookie.addCookieString(this.defaultView.location, cookie);
-	}
+	public set cookie(_cookie: string) {}
 
 	/**
 	 * Node name.
@@ -381,9 +373,7 @@ export default class Document extends Node implements IDocument {
 	 * @returns CSS style sheets.
 	 */
 	public get styleSheets(): CSSStyleSheet[] {
-		const styles = <INodeList<IHTMLLinkElement | IHTMLStyleElement>>(
-			this.querySelectorAll('link[rel="stylesheet"][href],style')
-		);
+		const styles = <INodeList<IHTMLStyleElement>>this.querySelectorAll('style');
 		const styleSheets = [];
 		for (const style of styles) {
 			const sheet = style.sheet;
@@ -429,11 +419,9 @@ export default class Document extends Node implements IDocument {
 
 	/**
 	 * Returns location.
-	 *
-	 * @returns Location.
 	 */
-	public get location(): Location {
-		return this.defaultView.location;
+	public get location(): never {
+		throw new Error('Not implemented.');
 	}
 
 	/**
@@ -441,8 +429,8 @@ export default class Document extends Node implements IDocument {
 	 *
 	 * @returns Scripts.
 	 */
-	public get scripts(): IHTMLCollection<IHTMLScriptElement> {
-		return <IHTMLCollection<IHTMLScriptElement>>this.getElementsByTagName('script');
+	public get scripts(): IHTMLCollection<never> {
+		return <IHTMLCollection<never>>this.getElementsByTagName('script');
 	}
 
 	/**
@@ -456,7 +444,7 @@ export default class Document extends Node implements IDocument {
 		if (element) {
 			return element.href;
 		}
-		return this.defaultView.location.href;
+		return '';
 	}
 
 	/**
@@ -465,7 +453,7 @@ export default class Document extends Node implements IDocument {
 	 * @returns the URL of the current document.
 	 * */
 	public get URL(): string {
-		return this.defaultView.location.href;
+		return '';
 	}
 
 	/**
@@ -508,7 +496,7 @@ export default class Document extends Node implements IDocument {
 	 *
 	 * @returns the currently executing script element.
 	 */
-	public get currentScript(): IHTMLScriptElement {
+	public get currentScript(): null {
 		return this._currentScript;
 	}
 

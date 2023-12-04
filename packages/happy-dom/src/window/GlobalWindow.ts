@@ -63,17 +63,4 @@ export default class GlobalWindow extends Window implements IWindow {
 	public parseFloat: typeof parseFloat = globalThis.parseFloat;
 	public parseInt: typeof parseInt = globalThis.parseInt;
 	public undefined: typeof undefined = globalThis.undefined;
-	/**
-	 * @deprecated
-	 */
-	public unescape: (str: string) => string = globalThis.unescape;
-	public gc: () => void = globalThis.gc;
-	public v8debug?: unknown = globalThis.v8debug;
-
-	/**
-	 * Setup of VM context.
-	 */
-	protected override _setupVMContext(): void {
-		// Do nothing
-	}
 }
