@@ -95,7 +95,6 @@ import DOMRect from '../nodes/element/DOMRect.js';
 import Window from './Window.js';
 import Attr from '../nodes/attr/Attr.js';
 import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
-import { Performance } from 'perf_hooks';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
 import IHappyDOMSettings from './IHappyDOMSettings.js';
@@ -370,7 +369,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly outerHeight: number;
 	readonly sessionStorage: Storage;
 	readonly localStorage: Storage;
-	readonly performance: Performance;
 	readonly pageXOffset: number;
 	readonly pageYOffset: number;
 	readonly scrollX: number;

@@ -94,7 +94,6 @@ import Plugin from '../navigator/Plugin.js';
 import PluginArray from '../navigator/PluginArray.js';
 import RangeImplementation from '../range/Range.js';
 import DOMRect from '../nodes/element/DOMRect.js';
-import * as PerfHooks from 'perf_hooks';
 import { Buffer } from 'buffer';
 import { webcrypto } from 'crypto';
 import Base64 from '../base64/Base64.js';
@@ -427,7 +426,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly devicePixelRatio = 1;
 	public readonly sessionStorage: Storage;
 	public readonly localStorage: Storage;
-	public readonly performance = PerfHooks.performance;
 	public readonly innerWidth: number = 1024;
 	public readonly innerHeight: number = 768;
 	public readonly outerWidth: number = 1024;
@@ -829,9 +827,9 @@ export default class Window extends EventTarget implements IWindow {
 	public requestAnimationFrame(callback: (timestamp: number) => void): NodeJS.Immediate {
 		const id = global.setImmediate(() => {
 			if (this.happyDOM.settings.disableErrorCapturing) {
-				callback(this.performance.now());
+				callback(performance.now());
 			} else {
-				WindowErrorUtility.captureError(this, () => callback(this.performance.now()));
+				WindowErrorUtility.captureError(this, () => callback(performance.now()));
 			}
 			this.happyDOM.asyncTaskManager.endImmediate(id);
 		});
