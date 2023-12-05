@@ -47,8 +47,13 @@ For unhappy-dom, we remove:
 
 * We could in theory restore a few of these things if the user would polyfill:
 
+  - URL (for Location, etc.)
   - Fetch (for HTMLLinkElement, etc.)
   - [Buffer](https://github.com/feross/buffer) (for DataTransfer, thus Clipboard, etc.)
+
+* There are still some dependencies, but I've kept them, as they use only ECMA features:
+  - [CSS.escape](https://github.com/mathiasbynens/CSS.escape)
+  - [entities](https://github.com/fb55/entities)
 
 ### Works With
 
