@@ -85,7 +85,6 @@ import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
 import IHappyDOMSettings from './IHappyDOMSettings.js';
-import Stream from 'stream';
 import INodeJSGlobal from './INodeJSGlobal.js';
 import VirtualConsolePrinter from '../console/VirtualConsolePrinter.js';
 import Permissions from '../permissions/Permissions.js';
@@ -291,8 +290,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly PluginArray: typeof PluginArray;
 	readonly Range: typeof Range;
 	readonly DOMRect: typeof DOMRect;
-	readonly ReadableStream: typeof Stream.Readable;
-	readonly WritableStream: typeof Stream.Writable;
 	readonly Permissions: typeof Permissions;
 	readonly PermissionStatus: typeof PermissionStatus;
 

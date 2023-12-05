@@ -87,7 +87,6 @@ import Attr from '../nodes/attr/Attr.js';
 import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
-import Stream from 'stream';
 import IHappyDOMOptions from './IHappyDOMOptions.js';
 import WindowErrorUtility from './WindowErrorUtility.js';
 import VirtualConsole from '../console/VirtualConsole.js';
@@ -353,9 +352,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly Plugin = Plugin;
 	public readonly PluginArray = PluginArray;
 	public readonly DOMRect: typeof DOMRect;
-	public readonly ReadableStream = Stream.Readable;
-	public readonly WritableStream = Stream.Writable;
-	public readonly TransformStream = Stream.Transform;
 	public readonly Permissions = Permissions;
 	public readonly PermissionStatus = PermissionStatus;
 	public readonly DOMParser: typeof DOMParserImplementation;
