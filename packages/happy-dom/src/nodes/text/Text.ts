@@ -3,8 +3,6 @@ import CharacterData from '../character-data/CharacterData.js';
 import IText from './IText.js';
 import DOMException from '../../exception/DOMException.js';
 import DOMExceptionNameEnum from '../../exception/DOMExceptionNameEnum.js';
-import HTMLTextAreaElement from '../html-text-area-element/HTMLTextAreaElement.js';
-import INode from '../node/INode.js';
 
 /**
  * Text node.
@@ -19,24 +17,6 @@ export default class Text extends CharacterData implements IText {
 	 */
 	public get nodeName(): string {
 		return '#text';
-	}
-
-	/**
-	 * @override
-	 */
-	public override get data(): string {
-		return this._data;
-	}
-
-	/**
-	 * @override
-	 */
-	public override set data(data: string) {
-		super.data = data;
-
-		if (this._textAreaNode) {
-			(<HTMLTextAreaElement>this._textAreaNode)._resetSelection();
-		}
 	}
 
 	/**
@@ -87,23 +67,5 @@ export default class Text extends CharacterData implements IText {
 	 */
 	public cloneNode(deep = false): IText {
 		return <Text>super.cloneNode(deep);
-	}
-
-	/**
-	 * @override
-	 */
-	public override _connectToNode(parentNode: INode = null): void {
-		const oldTextAreaNode = <HTMLTextAreaElement>this._textAreaNode;
-
-		super._connectToNode(parentNode);
-
-		if (oldTextAreaNode !== this._textAreaNode) {
-			if (oldTextAreaNode) {
-				oldTextAreaNode._resetSelection();
-			}
-			if (this._textAreaNode) {
-				(<HTMLTextAreaElement>this._textAreaNode)._resetSelection();
-			}
-		}
 	}
 }

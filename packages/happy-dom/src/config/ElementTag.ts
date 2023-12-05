@@ -1,21 +1,14 @@
 import HTMLElement from '../nodes/html-element/HTMLElement.js';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement.js';
-import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement.js';
-import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement.js';
-import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement.js';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement.js';
 import SVGElement from '../nodes/svg-element/SVGElement.js';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement.js';
 import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement.js';
-import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement.js';
 import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement.js';
 import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement.js';
 import HTMLBaseElement from '../nodes/html-base-element/HTMLBaseElement.js';
-import HTMLSelectElement from '../nodes/html-select-element/HTMLSelectElement.js';
-import HTMLOptionElement from '../nodes/html-option-element/HTMLOptionElement.js';
 import HTMLOptGroupElement from '../nodes/html-opt-group-element/HTMLOptGroupElement.js';
 import HTMLDialogElement from '../nodes/html-dialog-element/HTMLDialogElement.js';
-import HTMLButtonElement from '../nodes/html-button-element/HTMLButtonElement.js';
 import HTMLAudioElement from '../nodes/html-audio-element/HTMLAudioElement.js';
 import HTMLVideoElement from '../nodes/html-video-element/HTMLVideoElement.js';
 import HTMLAnchorElement from '../nodes/html-anchor-element/HTMLAnchorElement.js';
@@ -35,12 +28,8 @@ export default {
 	BLOCKQUAOTE: HTMLElement,
 	BODY: HTMLElement,
 	TEMPLATE: HTMLTemplateElement,
-	FORM: HTMLFormElement,
-	INPUT: HTMLInputElement,
-	TEXTAREA: HTMLTextAreaElement,
 	IMG: HTMLImageElement,
 	STYLE: HTMLStyleElement,
-	LABEL: HTMLLabelElement,
 	SLOT: HTMLSlotElement,
 	SVG: SVGSVGElement,
 	G: SVGElement,
@@ -56,7 +45,6 @@ export default {
 	META: HTMLMetaElement,
 	BLOCKQUOTE: HTMLElement,
 	BR: HTMLElement,
-	BUTTON: HTMLButtonElement,
 	CANVAS: HTMLElement,
 	CAPTION: HTMLElement,
 	CITE: HTMLElement,
@@ -107,7 +95,6 @@ export default {
 	OBJECT: HTMLElement,
 	OL: HTMLElement,
 	OPTGROUP: HTMLOptGroupElement,
-	OPTION: HTMLOptionElement,
 	OUTPUT: HTMLElement,
 	P: HTMLElement,
 	PARAM: HTMLElement,
@@ -123,7 +110,6 @@ export default {
 	S: HTMLElement,
 	SAMP: HTMLElement,
 	SECTION: HTMLElement,
-	SELECT: HTMLSelectElement,
 	SMALL: HTMLElement,
 	SOURCE: HTMLElement,
 	SPAN: HTMLElement,

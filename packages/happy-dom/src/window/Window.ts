@@ -10,15 +10,10 @@ import Comment from '../nodes/comment/Comment.js';
 import ShadowRoot from '../nodes/shadow-root/ShadowRoot.js';
 import Element from '../nodes/element/Element.js';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement.js';
-import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement.js';
 import HTMLElement from '../nodes/html-element/HTMLElement.js';
 import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement.js';
-import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement.js';
-import HTMLSelectElement from '../nodes/html-select-element/HTMLSelectElement.js';
-import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement.js';
 import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement.js';
 import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement.js';
-import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement.js';
 import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement.js';
 import HTMLMediaElement from '../nodes/html-media-element/HTMLMediaElement.js';
 import HTMLAudioElement from '../nodes/html-audio-element/HTMLAudioElement.js';
@@ -49,10 +44,7 @@ import MutationRecord from '../mutation-observer/MutationRecord.js';
 import DOMParserImplementation from '../dom-parser/DOMParser.js';
 import XMLSerializer from '../xml-serializer/XMLSerializer.js';
 import ResizeObserver from '../resize-observer/ResizeObserver.js';
-import Blob from '../file/Blob.js';
-import File from '../file/File.js';
 import DOMException from '../exception/DOMException.js';
-import FileReaderImplementation from '../file/FileReader.js';
 import History from '../history/History.js';
 import CSSStyleSheet from '../css/CSSStyleSheet.js';
 import CSSStyleDeclaration from '../css/declaration/CSSStyleDeclaration.js';
@@ -70,10 +62,6 @@ import MouseEvent from '../event/events/MouseEvent.js';
 import PointerEvent from '../event/events/PointerEvent.js';
 import FocusEvent from '../event/events/FocusEvent.js';
 import WheelEvent from '../event/events/WheelEvent.js';
-import DataTransfer from '../event/DataTransfer.js';
-import DataTransferItem from '../event/DataTransferItem.js';
-import DataTransferItemList from '../event/DataTransferItemList.js';
-import InputEvent from '../event/events/InputEvent.js';
 import UIEvent from '../event/UIEvent.js';
 import ErrorEvent from '../event/events/ErrorEvent.js';
 import StorageEvent from '../event/events/StorageEvent.js';
@@ -83,7 +71,6 @@ import AsyncTaskManager from '../async-task-manager/AsyncTaskManager.js';
 import Storage from '../storage/Storage.js';
 import IWindow from './IWindow.js';
 import HTMLCollection from '../nodes/element/HTMLCollection.js';
-import HTMLFormControlsCollection from '../nodes/html-form-element/HTMLFormControlsCollection.js';
 import NodeList from '../nodes/node/NodeList.js';
 import MediaQueryList from '../match-media/MediaQueryList.js';
 import Selection from '../selection/Selection.js';
@@ -94,7 +81,6 @@ import Plugin from '../navigator/Plugin.js';
 import PluginArray from '../navigator/PluginArray.js';
 import RangeImplementation from '../range/Range.js';
 import DOMRect from '../nodes/element/DOMRect.js';
-import { Buffer } from 'buffer';
 import { webcrypto } from 'crypto';
 import Base64 from '../base64/Base64.js';
 import IDocument from '../nodes/document/IDocument.js';
@@ -102,12 +88,8 @@ import Attr from '../nodes/attr/Attr.js';
 import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
-import FileList from '../nodes/html-input-element/FileList.js';
 import Stream from 'stream';
-import FormData from '../form-data/FormData.js';
 import IHappyDOMOptions from './IHappyDOMOptions.js';
-import RadioNodeList from '../nodes/html-form-element/RadioNodeList.js';
-import ValidityState from '../validity-state/ValidityState.js';
 import WindowErrorUtility from './WindowErrorUtility.js';
 import VirtualConsole from '../console/VirtualConsole.js';
 import VirtualConsolePrinter from '../console/VirtualConsolePrinter.js';
@@ -115,9 +97,6 @@ import IHappyDOMSettings from './IHappyDOMSettings.js';
 import PackageVersion from '../version.js';
 import Permissions from '../permissions/Permissions.js';
 import PermissionStatus from '../permissions/PermissionStatus.js';
-import Clipboard from '../clipboard/Clipboard.js';
-import ClipboardItem from '../clipboard/ClipboardItem.js';
-import ClipboardEvent from '../event/events/ClipboardEvent.js';
 
 const ORIGINAL_SET_TIMEOUT = setTimeout;
 const ORIGINAL_CLEAR_TIMEOUT = clearTimeout;
@@ -220,13 +199,8 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly HTMLElement = HTMLElement;
 	public readonly HTMLUnknownElement = HTMLUnknownElement;
 	public readonly HTMLTemplateElement = HTMLTemplateElement;
-	public readonly HTMLFormElement = HTMLFormElement;
-	public readonly HTMLInputElement = HTMLInputElement;
-	public readonly HTMLSelectElement = HTMLSelectElement;
-	public readonly HTMLTextAreaElement = HTMLTextAreaElement;
 	public readonly HTMLImageElement = HTMLImageElement;
 	public readonly HTMLStyleElement = HTMLStyleElement;
-	public readonly HTMLLabelElement = HTMLLabelElement;
 	public readonly HTMLSlotElement = HTMLSlotElement;
 	public readonly HTMLMetaElement = HTMLMetaElement;
 	public readonly HTMLMediaElement = HTMLMediaElement;
@@ -296,13 +270,11 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly PointerEvent = PointerEvent;
 	public readonly FocusEvent = FocusEvent;
 	public readonly WheelEvent = WheelEvent;
-	public readonly InputEvent = InputEvent;
 	public readonly ErrorEvent = ErrorEvent;
 	public readonly StorageEvent = StorageEvent;
 	public readonly SubmitEvent = SubmitEvent;
 	public readonly ProgressEvent = ProgressEvent;
 	public readonly MediaQueryListEvent = MediaQueryListEvent;
-	public readonly ClipboardEvent = ClipboardEvent;
 
 	// Non-implemented event classes
 	public readonly AudioProcessingEvent = Event;
@@ -355,22 +327,16 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly MutationRecord = MutationRecord;
 	public readonly EventTarget = EventTarget;
 	public readonly MessagePort = MessagePort;
-	public readonly DataTransfer = DataTransfer;
-	public readonly DataTransferItem = DataTransferItem;
-	public readonly DataTransferItemList = DataTransferItemList;
 	public readonly CustomElementRegistry = CustomElementRegistry;
 	public readonly Window = <typeof Window>this.constructor;
 	public readonly XMLSerializer = XMLSerializer;
 	public readonly ResizeObserver = ResizeObserver;
 	public readonly CSSStyleSheet = CSSStyleSheet;
-	public readonly Blob = Blob;
-	public readonly File = File;
 	public readonly DOMException = DOMException;
 	public readonly History = History;
 	public readonly Screen = Screen;
 	public readonly Storage = Storage;
 	public readonly HTMLCollection = HTMLCollection;
-	public readonly HTMLFormControlsCollection = HTMLFormControlsCollection;
 	public readonly NodeList = NodeList;
 	public readonly CSSUnitValue = CSSUnitValue;
 	public readonly CSSRule = CSSRule;
@@ -387,18 +353,12 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly MimeTypeArray = MimeTypeArray;
 	public readonly Plugin = Plugin;
 	public readonly PluginArray = PluginArray;
-	public readonly FileList = FileList;
 	public readonly DOMRect: typeof DOMRect;
-	public readonly RadioNodeList: typeof RadioNodeList;
-	public readonly ValidityState: typeof ValidityState;
 	public readonly ReadableStream = Stream.Readable;
 	public readonly WritableStream = Stream.Writable;
 	public readonly TransformStream = Stream.Transform;
-	public readonly FormData = FormData;
 	public readonly Permissions = Permissions;
 	public readonly PermissionStatus = PermissionStatus;
-	public readonly Clipboard = Clipboard;
-	public readonly ClipboardItem = ClipboardItem;
 	public readonly DOMParser: typeof DOMParserImplementation;
 	public readonly Range;
 	public readonly FileReader;
@@ -436,7 +396,6 @@ export default class Window extends EventTarget implements IWindow {
 	public Array: typeof Array;
 	public ArrayBuffer: typeof ArrayBuffer;
 	public Boolean: typeof Boolean;
-	public Buffer = Buffer;
 	public DataView: typeof DataView;
 	public Date: typeof Date;
 	public Error: typeof Error;
@@ -599,7 +558,6 @@ export default class Window extends EventTarget implements IWindow {
 
 		ImageImplementation._ownerDocument = document;
 		DocumentFragmentImplementation._ownerDocument = document;
-		FileReaderImplementation._ownerDocument = document;
 		DOMParserImplementation._ownerDocument = document;
 		RangeImplementation._ownerDocument = document;
 
@@ -608,9 +566,6 @@ export default class Window extends EventTarget implements IWindow {
 			public static _ownerDocument: IDocument = document;
 		}
 		class DocumentFragment extends DocumentFragmentImplementation {
-			public static _ownerDocument: IDocument = document;
-		}
-		class FileReader extends FileReaderImplementation {
 			public static _ownerDocument: IDocument = document;
 		}
 		class DOMParser extends DOMParserImplementation {
@@ -626,7 +581,6 @@ export default class Window extends EventTarget implements IWindow {
 
 		this.Image = Image;
 		this.DocumentFragment = DocumentFragment;
-		this.FileReader = FileReader;
 		this.DOMParser = DOMParser;
 		this.Range = Range;
 		this.Audio = Audio;

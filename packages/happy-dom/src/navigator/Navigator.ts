@@ -2,9 +2,6 @@ import MimeTypeArray from './MimeTypeArray.js';
 import PluginArray from './PluginArray.js';
 import IWindow from '../window/IWindow.js';
 import Permissions from '../permissions/Permissions.js';
-import Clipboard from '../clipboard/Clipboard.js';
-import Blob from '../file/Blob.js';
-import FormData from '../form-data/FormData.js';
 
 /**
  * Browser Navigator API.
@@ -16,7 +13,6 @@ import FormData from '../form-data/FormData.js';
  */
 export default class Navigator {
 	#ownerWindow: IWindow;
-	#clipboard: Clipboard;
 	#permissions: Permissions;
 
 	/**
@@ -26,7 +22,6 @@ export default class Navigator {
 	 */
 	constructor(ownerWindow: IWindow) {
 		this.#ownerWindow = ownerWindow;
-		this.#clipboard = new Clipboard(ownerWindow);
 		this.#permissions = new Permissions();
 	}
 
@@ -177,10 +172,9 @@ export default class Navigator {
 	 * Returns a Clipboard object providing access to the contents of the system clipboard.
 	 *
 	 * @see https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard
-	 * @returns Clipboard.
 	 */
-	public get clipboard(): Clipboard {
-		return this.#clipboard;
+	public get clipboard(): never {
+		throw new Error('Not implemented.');
 	}
 
 	/**
@@ -220,10 +214,7 @@ export default class Navigator {
 	 * @param _data Data.
 	 * @returns "true" if the user agent successfully queued the data for transfer. Otherwise, it returns "false".
 	 */
-	public sendBeacon(
-		_url: string,
-		_data: string | Blob | ArrayBuffer | ArrayBufferView | FormData
-	): boolean {
+	public sendBeacon(_url: string, _data: string | ArrayBuffer | ArrayBufferView): boolean {
 		return true;
 	}
 

@@ -1,7 +1,6 @@
 import DOMException from '../exception/DOMException.js';
 import IElement from '../nodes/element/IElement.js';
 import Element from '../nodes/element/Element.js';
-import IHTMLInputElement from '../nodes/html-input-element/IHTMLInputElement.js';
 import SelectorCombinatorEnum from './SelectorCombinatorEnum.js';
 import ISelectorAttribute from './ISelectorAttribute.js';
 import ISelectorMatch from './ISelectorMatch.js';
@@ -183,7 +182,9 @@ export default class SelectorItem {
 					}
 					return isFound;
 				case 'checked':
-					return element.tagName === 'INPUT' && (<IHTMLInputElement>element).checked;
+					return (
+						element.tagName === 'INPUT' && !!(<{ checked: boolean }>(<unknown>element)).checked
+					);
 				case 'empty':
 					return !(<Element>element)._children.length;
 				case 'root':

@@ -1,15 +1,9 @@
 import GlobalWindow from './window/GlobalWindow.js';
 import IWindow from './window/IWindow.js';
 import Window from './window/Window.js';
-import DataTransfer from './event/DataTransfer.js';
-import DataTransferItem from './event/DataTransferItem.js';
-import DataTransferItemList from './event/DataTransferItemList.js';
 import MutationObserver from './mutation-observer/MutationObserver.js';
 import MutationRecord from './mutation-observer/MutationRecord.js';
 import ResizeObserver from './resize-observer/ResizeObserver.js';
-import Blob from './file/Blob.js';
-import File from './file/File.js';
-import FileReader from './file/FileReader.js';
 import DOMException from './exception/DOMException.js';
 import History from './history/History.js';
 import CSSStyleDeclaration from './css/declaration/CSSStyleDeclaration.js';
@@ -30,13 +24,11 @@ import IAnimationEventInit from './event/events/IAnimationEventInit.js';
 import ICustomEventInit from './event/events/ICustomEventInit.js';
 import IErrorEventInit from './event/events/IErrorEventInit.js';
 import IFocusEventInit from './event/events/IFocusEventInit.js';
-import IInputEventInit from './event/events/IInputEventInit.js';
 import IKeyboardEventInit from './event/events/IKeyboardEventInit.js';
 import IMouseEventInit from './event/events/IMouseEventInit.js';
 import IProgressEventInit from './event/events/IProgressEventInit.js';
 import ISubmitEventInit from './event/events/ISubmitEventInit.js';
 import IWheelEventInit from './event/events/IWheelEventInit.js';
-import InputEvent from './event/events/InputEvent.js';
 import KeyboardEvent from './event/events/KeyboardEvent.js';
 import MouseEvent from './event/events/MouseEvent.js';
 import ProgressEvent from './event/events/ProgressEvent.js';
@@ -52,18 +44,10 @@ import Element from './nodes/element/Element.js';
 import IElement from './nodes/element/IElement.js';
 import IHTMLCollection from './nodes/element/IHTMLCollection.js';
 import HTMLCollection from './nodes/element/HTMLCollection.js';
-import HTMLFormControlsCollection from './nodes/html-form-element/HTMLFormControlsCollection.js';
-import IHTMLFormControlsCollection from './nodes/html-form-element/IHTMLFormControlsCollection.js';
 import HTMLElement from './nodes/html-element/HTMLElement.js';
 import IHTMLElement from './nodes/html-element/IHTMLElement.js';
 import HTMLTemplateElement from './nodes/html-template-element/HTMLTemplateElement.js';
 import IHTMLTemplateElement from './nodes/html-template-element/IHTMLTemplateElement.js';
-import HTMLFormElement from './nodes/html-form-element/HTMLFormElement.js';
-import IHTMLFormElement from './nodes/html-form-element/IHTMLFormElement.js';
-import HTMLInputElement from './nodes/html-input-element/HTMLInputElement.js';
-import IHTMLInputElement from './nodes/html-input-element/IHTMLInputElement.js';
-import HTMLTextAreaElement from './nodes/html-text-area-element/HTMLTextAreaElement.js';
-import IHTMLTextAreaElement from './nodes/html-text-area-element/IHTMLTextAreaElement.js';
 import HTMLImageElement from './nodes/html-image-element/HTMLImageElement.js';
 import IHTMLImageElement from './nodes/html-image-element/IHTMLImageElement.js';
 import Image from './nodes/html-image-element/Image.js';
@@ -71,8 +55,6 @@ import HTMLStyleElement from './nodes/html-style-element/HTMLStyleElement.js';
 import IHTMLStyleElement from './nodes/html-style-element/IHTMLStyleElement.js';
 import HTMLSlotElement from './nodes/html-slot-element/HTMLSlotElement.js';
 import IHTMLSlotElement from './nodes/html-slot-element/IHTMLSlotElement.js';
-import HTMLLabelElement from './nodes/html-label-element/HTMLLabelElement.js';
-import IHTMLLabelElement from './nodes/html-label-element/IHTMLLabelElement.js';
 import HTMLMetaElement from './nodes/html-meta-element/HTMLMetaElement.js';
 import IHTMLMetaElement from './nodes/html-meta-element/IHTMLMetaElement.js';
 import IHTMLMediaElement from './nodes/html-media-element/IHTMLMediaElement.js';
@@ -126,9 +108,6 @@ import Attr from './nodes/attr/Attr.js';
 import IAttr from './nodes/attr/IAttr.js';
 import ProcessingInstruction from './nodes/processing-instruction/ProcessingInstruction.js';
 import IProcessingInstruction from './nodes/processing-instruction/IProcessingInstruction.js';
-import FileList from './nodes/html-input-element/FileList.js';
-import IFileList from './nodes/html-input-element/IFileList.js';
-import FormData from './form-data/FormData.js';
 import EventPhaseEnum from './event/EventPhaseEnum.js';
 import VirtualConsoleLogLevelEnum from './console/enums/VirtualConsoleLogLevelEnum.js';
 import VirtualConsoleLogTypeEnum from './console/enums/VirtualConsoleLogTypeEnum.js';
@@ -139,24 +118,14 @@ import VirtualConsole from './console/VirtualConsole.js';
 import VirtualConsolePrinter from './console/VirtualConsolePrinter.js';
 import Permissions from './permissions/Permissions.js';
 import PermissionStatus from './permissions/PermissionStatus.js';
-import Clipboard from './clipboard/Clipboard.js';
-import ClipboardItem from './clipboard/ClipboardItem.js';
-import ClipboardEvent from './event/events/ClipboardEvent.js';
-import IClipboardEventInit from './event/events/IClipboardEventInit.js';
 
 export {
 	GlobalWindow,
 	Window,
 	IWindow,
-	DataTransfer,
-	DataTransferItem,
-	DataTransferItemList,
 	MutationObserver,
 	MutationRecord,
 	ResizeObserver,
-	Blob,
-	File,
-	FileReader,
 	DOMException,
 	History,
 	CSSStyleDeclaration,
@@ -177,20 +146,16 @@ export {
 	CustomEvent,
 	IErrorEventInit,
 	IFocusEventInit,
-	IInputEventInit,
 	IKeyboardEventInit,
 	IMouseEventInit,
 	IProgressEventInit,
 	ISubmitEventInit,
 	IWheelEventInit,
-	InputEvent,
 	KeyboardEvent,
 	MouseEvent,
 	ProgressEvent,
 	SubmitEvent,
 	WheelEvent,
-	ClipboardEvent,
-	IClipboardEventInit,
 	DOMParser,
 	Document,
 	IDocument,
@@ -201,18 +166,10 @@ export {
 	IElement,
 	IHTMLCollection,
 	HTMLCollection,
-	HTMLFormControlsCollection,
-	IHTMLFormControlsCollection,
 	HTMLElement,
 	IHTMLElement,
 	HTMLTemplateElement,
 	IHTMLTemplateElement,
-	HTMLFormElement,
-	IHTMLFormElement,
-	HTMLInputElement,
-	IHTMLInputElement,
-	HTMLTextAreaElement,
-	IHTMLTextAreaElement,
 	HTMLImageElement,
 	IHTMLImageElement,
 	Image,
@@ -220,8 +177,6 @@ export {
 	IHTMLStyleElement,
 	HTMLSlotElement,
 	IHTMLSlotElement,
-	HTMLLabelElement,
-	IHTMLLabelElement,
 	HTMLMetaElement,
 	IHTMLMetaElement,
 	HTMLMediaElement,
@@ -275,9 +230,6 @@ export {
 	IAttr,
 	ProcessingInstruction,
 	IProcessingInstruction,
-	FileList,
-	IFileList,
-	FormData,
 	EventPhaseEnum,
 	VirtualConsoleLogLevelEnum,
 	VirtualConsoleLogTypeEnum,
@@ -287,7 +239,5 @@ export {
 	VirtualConsole,
 	VirtualConsolePrinter,
 	Permissions,
-	PermissionStatus,
-	Clipboard,
-	ClipboardItem
+	PermissionStatus
 };

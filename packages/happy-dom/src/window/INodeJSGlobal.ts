@@ -4,7 +4,6 @@ export default interface INodeJSGlobal {
 	Array: typeof Array;
 	ArrayBuffer: typeof ArrayBuffer;
 	Boolean: typeof Boolean;
-	Buffer: typeof Buffer;
 	DataView: typeof DataView;
 	Date: typeof Date;
 	Error: typeof Error;
@@ -55,8 +54,6 @@ export default interface INodeJSGlobal {
 	setTimeout: (callback: (...args: any[]) => void, ms?: number, ...args: any[]) => NodeJS.Timeout;
 	queueMicrotask: typeof queueMicrotask;
 	undefined: typeof undefined;
-	gc: () => void;
-	v8debug?: any;
 
 	/**
 	 * @deprecated

@@ -36,9 +36,18 @@ For unhappy-dom, we remove:
 - HTMLIFrameElement
 - HTMLLinkElement
 - HTMLScriptElement
+- HTMLButtonElement
+- All form-related elements
+- DataTransfer (therefore also Blob)
+- Clipboard
 - VM
 - XHR
 - v8 methods like gc()
+
+* We could in theory restore a few of these things if the user would polyfill:
+
+  - Fetch (for HTMLLinkElement, etc.)
+  - [Buffer](https://github.com/feross/buffer) (for DataTransfer, thus Clipboard, etc.)
 
 ### Works With
 
