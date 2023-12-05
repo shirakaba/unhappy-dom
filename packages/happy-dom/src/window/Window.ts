@@ -145,9 +145,7 @@ export default class Window extends EventTarget implements IWindow {
 			disableErrorCapturing: false,
 			enableFileSystemHttpRequests: false,
 			navigator: {
-				userAgent: `Mozilla/5.0 (X11; ${
-					process.platform.charAt(0).toUpperCase() + process.platform.slice(1) + ' ' + process.arch
-				}) AppleWebKit/537.36 (KHTML, like Gecko) HappyDOM/${PackageVersion.version}`
+				userAgent: `Mozilla/5.0 (X11; AppleWebKit/537.36 (KHTML, like Gecko) HappyDOM/${PackageVersion.version}`
 			},
 			device: {
 				prefersColorScheme: 'light',
