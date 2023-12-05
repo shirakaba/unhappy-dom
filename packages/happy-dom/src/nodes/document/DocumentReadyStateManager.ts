@@ -6,18 +6,16 @@ import IWindow from '../../window/IWindow.js';
 export default class DocumentReadyStateManager {
 	private totalTasks = 0;
 	private readyStateCallbacks: (() => void)[] = [];
-	private window: IWindow = null;
-	private immediate: NodeJS.Immediate | null = null;
+	private immediate: ReturnType<typeof setTimeout> | null = null;
 	private isComplete = false;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param window
+	 * @param _window
 	 */
-	constructor(window: IWindow) {
-		this.window = window;
-	}
+	// eslint-disable-next-line no-useless-constructor
+	constructor(_window: IWindow) {}
 
 	/**
 	 * Returns a promise that is fulfilled when ready state is complete.
@@ -31,7 +29,7 @@ export default class DocumentReadyStateManager {
 			} else {
 				this.readyStateCallbacks.push(resolve);
 				if (this.totalTasks === 0 && !this.immediate) {
-					this.immediate = this.window.requestAnimationFrame(this.endTask.bind(this));
+					this.immediate = setTimeout(this.endTask.bind(this), 0);
 				}
 			}
 		});
@@ -46,7 +44,7 @@ export default class DocumentReadyStateManager {
 		}
 
 		if (this.immediate) {
-			this.window.cancelAnimationFrame(this.immediate);
+			clearTimeout(this.immediate);
 			this.immediate = null;
 		}
 
@@ -62,7 +60,7 @@ export default class DocumentReadyStateManager {
 		}
 
 		if (this.immediate) {
-			this.window.cancelAnimationFrame(this.immediate);
+			clearTimeout(this.immediate);
 			this.immediate = null;
 		}
 

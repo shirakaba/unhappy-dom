@@ -67,7 +67,6 @@ import ErrorEvent from '../event/events/ErrorEvent.js';
 import StorageEvent from '../event/events/StorageEvent.js';
 import SubmitEvent from '../event/events/SubmitEvent.js';
 import Screen from '../screen/Screen.js';
-import AsyncTaskManager from '../async-task-manager/AsyncTaskManager.js';
 import Storage from '../storage/Storage.js';
 import IWindow from './IWindow.js';
 import HTMLCollection from '../nodes/element/HTMLCollection.js';
@@ -88,19 +87,12 @@ import NamedNodeMap from '../named-node-map/NamedNodeMap.js';
 import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
 import IHappyDOMOptions from './IHappyDOMOptions.js';
-import WindowErrorUtility from './WindowErrorUtility.js';
 import VirtualConsole from '../console/VirtualConsole.js';
 import VirtualConsolePrinter from '../console/VirtualConsolePrinter.js';
 import IHappyDOMSettings from './IHappyDOMSettings.js';
 import PackageVersion from '../version.js';
 import Permissions from '../permissions/Permissions.js';
 import PermissionStatus from '../permissions/PermissionStatus.js';
-
-const ORIGINAL_SET_TIMEOUT = setTimeout;
-const ORIGINAL_CLEAR_TIMEOUT = clearTimeout;
-const ORIGINAL_SET_INTERVAL = setInterval;
-const ORIGINAL_CLEAR_INTERVAL = clearInterval;
-const ORIGINAL_QUEUE_MICROTASK = queueMicrotask;
 
 /**
  * Browser window.
@@ -111,9 +103,6 @@ const ORIGINAL_QUEUE_MICROTASK = queueMicrotask;
 export default class Window extends EventTarget implements IWindow {
 	// Happy DOM property.
 	public readonly happyDOM: {
-		whenAsyncComplete: () => Promise<void>;
-		cancelAsync: () => void;
-		asyncTaskManager: AsyncTaskManager;
 		setWindowSize: (options: { width?: number; height?: number }) => void;
 		virtualConsolePrinter: VirtualConsolePrinter | null;
 		settings: IHappyDOMSettings;
@@ -128,13 +117,6 @@ export default class Window extends EventTarget implements IWindow {
 		 */
 		setInnerHeight: (height: number) => void;
 	} = {
-		whenAsyncComplete: async (): Promise<void> => {
-			return await this.happyDOM.asyncTaskManager.whenComplete();
-		},
-		cancelAsync: (): void => {
-			this.happyDOM.asyncTaskManager.cancelAll();
-		},
-		asyncTaskManager: new AsyncTaskManager(),
 		setWindowSize: (options: { width?: number; height?: number }): void => {
 			if (
 				(options.width !== undefined && this.innerWidth !== options.width) ||
@@ -452,13 +434,6 @@ export default class Window extends EventTarget implements IWindow {
 	// See EventTarget class.
 	public _captureEventListenerCount: { [eventType: string]: number } = {};
 
-	// Private properties
-	private _setTimeout: (callback: Function, delay?: number, ...args: unknown[]) => NodeJS.Timeout;
-	private _clearTimeout: (id: NodeJS.Timeout) => void;
-	private _setInterval: (callback: Function, delay?: number, ...args: unknown[]) => NodeJS.Timeout;
-	private _clearInterval: (id: NodeJS.Timeout) => void;
-	private _queueMicrotask: (callback: Function) => void;
-
 	/**
 	 * Constructor.
 	 *
@@ -519,12 +494,6 @@ export default class Window extends EventTarget implements IWindow {
 			this.happyDOM.virtualConsolePrinter = new VirtualConsolePrinter();
 			this.console = new VirtualConsole(this.happyDOM.virtualConsolePrinter);
 		}
-
-		this._setTimeout = ORIGINAL_SET_TIMEOUT;
-		this._clearTimeout = ORIGINAL_CLEAR_TIMEOUT;
-		this._setInterval = ORIGINAL_SET_INTERVAL;
-		this._clearInterval = ORIGINAL_CLEAR_INTERVAL;
-		this._queueMicrotask = ORIGINAL_QUEUE_MICROTASK;
 
 		// Binds all methods to "this", so that it will use the correct context when called globally.
 		for (const key of Object.getOwnPropertyNames(Window.prototype).concat(
@@ -656,14 +625,7 @@ export default class Window extends EventTarget implements IWindow {
 	public scroll(x: { top?: number; left?: number; behavior?: string } | number, y?: number): void {
 		if (typeof x === 'object') {
 			if (x.behavior === 'smooth') {
-				this.setTimeout(() => {
-					if (x.top !== undefined) {
-						(<number>this.document.documentElement.scrollTop) = x.top;
-					}
-					if (x.left !== undefined) {
-						(<number>this.document.documentElement.scrollLeft) = x.left;
-					}
-				});
+				throw new Error("Scroll behavior 'smooth' is not supported.");
 			} else {
 				if (x.top !== undefined) {
 					(<number>this.document.documentElement.scrollTop) = x.top;
@@ -699,120 +661,6 @@ export default class Window extends EventTarget implements IWindow {
 	 */
 	public matchMedia(mediaQueryString: string): MediaQueryList {
 		return new MediaQueryList({ ownerWindow: this, media: mediaQueryString });
-	}
-
-	/**
-	 * Sets a timer which executes a function once the timer expires.
-	 *
-	 * @param callback Function to be executed.
-	 * @param [delay=0] Delay in ms.
-	 * @param args Arguments passed to the callback function.
-	 * @returns Timeout ID.
-	 */
-	public setTimeout(callback: Function, delay = 0, ...args: unknown[]): NodeJS.Timeout {
-		const id = this._setTimeout(() => {
-			if (this.happyDOM.settings.disableErrorCapturing) {
-				callback(...args);
-			} else {
-				WindowErrorUtility.captureError(this, () => callback(...args));
-			}
-			this.happyDOM.asyncTaskManager.endTimer(id);
-		}, delay);
-		this.happyDOM.asyncTaskManager.startTimer(id);
-		return id;
-	}
-
-	/**
-	 * Cancels a timeout previously established by calling setTimeout().
-	 *
-	 * @param id ID of the timeout.
-	 */
-	public clearTimeout(id: NodeJS.Timeout): void {
-		this._clearTimeout(id);
-		this.happyDOM.asyncTaskManager.endTimer(id);
-	}
-
-	/**
-	 * Calls a function with a fixed time delay between each call.
-	 *
-	 * @param callback Function to be executed.
-	 * @param [delay=0] Delay in ms.
-	 * @param args Arguments passed to the callback function.
-	 * @returns Interval ID.
-	 */
-	public setInterval(callback: Function, delay = 0, ...args: unknown[]): NodeJS.Timeout {
-		const id = this._setInterval(() => {
-			if (this.happyDOM.settings.disableErrorCapturing) {
-				callback(...args);
-			} else {
-				WindowErrorUtility.captureError(
-					this,
-					() => callback(...args),
-					() => this.clearInterval(id)
-				);
-			}
-		}, delay);
-		this.happyDOM.asyncTaskManager.startTimer(id);
-		return id;
-	}
-
-	/**
-	 * Cancels a timed repeating action which was previously established by a call to setInterval().
-	 *
-	 * @param id ID of the interval.
-	 */
-	public clearInterval(id: NodeJS.Timeout): void {
-		this._clearInterval(id);
-		this.happyDOM.asyncTaskManager.endTimer(id);
-	}
-
-	/**
-	 * Mock animation frames with timeouts.
-	 *
-	 * @param callback Callback.
-	 * @returns ID.
-	 */
-	public requestAnimationFrame(callback: (timestamp: number) => void): NodeJS.Immediate {
-		const id = global.setImmediate(() => {
-			if (this.happyDOM.settings.disableErrorCapturing) {
-				callback(performance.now());
-			} else {
-				WindowErrorUtility.captureError(this, () => callback(performance.now()));
-			}
-			this.happyDOM.asyncTaskManager.endImmediate(id);
-		});
-		this.happyDOM.asyncTaskManager.startImmediate(id);
-		return id;
-	}
-
-	/**
-	 * Mock animation frames with timeouts.
-	 *
-	 * @param id ID.
-	 */
-	public cancelAnimationFrame(id: NodeJS.Immediate): void {
-		global.clearImmediate(id);
-		this.happyDOM.asyncTaskManager.endImmediate(id);
-	}
-
-	/**
-	 * Queues a microtask to be executed at a safe time prior to control returning to the browser's event loop.
-	 *
-	 * @param callback Function to be executed.
-	 */
-	public queueMicrotask(callback: Function): void {
-		let isAborted = false;
-		const taskId = this.happyDOM.asyncTaskManager.startTask(() => (isAborted = true));
-		this._queueMicrotask(() => {
-			if (!isAborted) {
-				if (this.happyDOM.settings.disableErrorCapturing) {
-					callback();
-				} else {
-					WindowErrorUtility.captureError(this, <() => unknown>callback);
-				}
-				this.happyDOM.asyncTaskManager.endTask(taskId);
-			}
-		});
 	}
 
 	/**

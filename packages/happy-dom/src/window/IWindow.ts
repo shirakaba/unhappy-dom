@@ -64,7 +64,6 @@ import SubmitEvent from '../event/events/SubmitEvent.js';
 import MessageEvent from '../event/events/MessageEvent.js';
 import MessagePort from '../event/MessagePort.js';
 import Screen from '../screen/Screen.js';
-import AsyncTaskManager from '../async-task-manager/AsyncTaskManager.js';
 import Storage from '../storage/Storage.js';
 import NodeFilter from '../tree-walker/NodeFilter.js';
 import HTMLCollection from '../nodes/element/HTMLCollection.js';
@@ -96,9 +95,6 @@ import PermissionStatus from '../permissions/PermissionStatus.js';
 export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	// Happy DOM property.
 	readonly happyDOM: {
-		whenAsyncComplete: () => Promise<void>;
-		cancelAsync: () => void;
-		asyncTaskManager: AsyncTaskManager;
 		setWindowSize: (options: { width?: number; height?: number }) => void;
 		virtualConsolePrinter: VirtualConsolePrinter | null;
 		settings: IHappyDOMSettings;
@@ -366,55 +362,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	 * @returns A new MediaQueryList.
 	 */
 	matchMedia(mediaQueryString: string): MediaQueryList;
-
-	/**
-	 * Sets a timer which executes a function once the timer expires.
-	 *
-	 * @param callback Function to be executed.
-	 * @param [delay=0] Delay in ms.
-	 * @param args Arguments passed to the callback function.
-	 * @returns Timeout ID.
-	 */
-	setTimeout(callback: Function, delay?: number, ...args: unknown[]): NodeJS.Timeout;
-
-	/**
-	 * Cancels a timeout previously established by calling setTimeout().
-	 *
-	 * @param id ID of the timeout.
-	 */
-	clearTimeout(id: NodeJS.Timeout): void;
-
-	/**
-	 * Calls a function with a fixed time delay between each call.
-	 *
-	 * @param callback Function to be executed.
-	 * @param [delay=0] Delay in ms.
-	 * @param args Arguments passed to the callback function.
-	 * @returns Interval ID.
-	 */
-	setInterval(callback: Function, delay?: number, ...args: unknown[]): NodeJS.Timeout;
-
-	/**
-	 * Cancels a timed repeating action which was previously established by a call to setInterval().
-	 *
-	 * @param id ID of the interval.
-	 */
-	clearInterval(id: NodeJS.Timeout): void;
-
-	/**
-	 * Mock animation frames with timeouts.
-	 *
-	 * @param {Function} callback Callback.
-	 * @returns {NodeJS.Timeout} ID.
-	 */
-	requestAnimationFrame(callback: (timestamp: number) => void): NodeJS.Immediate;
-
-	/**
-	 * Mock animation frames with timeouts.
-	 *
-	 * @param {NodeJS.Timeout} id ID.
-	 */
-	cancelAnimationFrame(id: NodeJS.Immediate): void;
 
 	/**
 	 * Creates a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data).

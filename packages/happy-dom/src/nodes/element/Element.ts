@@ -881,7 +881,7 @@ export default class Element extends Node implements IElement {
 	public scroll(x: { top?: number; left?: number; behavior?: string } | number, y?: number): void {
 		if (typeof x === 'object') {
 			if (x.behavior === 'smooth') {
-				this.ownerDocument.defaultView.setTimeout(() => {
+				setTimeout(() => {
 					if (x.top !== undefined) {
 						(<number>this.scrollTop) = x.top;
 					}

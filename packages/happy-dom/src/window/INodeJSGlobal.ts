@@ -38,8 +38,6 @@ export default interface INodeJSGlobal {
 	Uint8ClampedArray: typeof Uint8ClampedArray;
 	WeakMap: WeakMapConstructor;
 	WeakSet: WeakSetConstructor;
-	clearInterval: (intervalId: NodeJS.Timeout) => void;
-	clearTimeout: (timeoutId: NodeJS.Timeout) => void;
 	decodeURI: typeof decodeURI;
 	decodeURIComponent: typeof decodeURIComponent;
 	encodeURI: typeof encodeURI;
@@ -50,9 +48,6 @@ export default interface INodeJSGlobal {
 	isNaN: typeof isNaN;
 	parseFloat: typeof parseFloat;
 	parseInt: typeof parseInt;
-	setInterval: (callback: (...args: any[]) => void, ms?: number, ...args: any[]) => NodeJS.Timeout;
-	setTimeout: (callback: (...args: any[]) => void, ms?: number, ...args: any[]) => NodeJS.Timeout;
-	queueMicrotask: typeof queueMicrotask;
 	undefined: typeof undefined;
 
 	/**
