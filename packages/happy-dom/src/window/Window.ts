@@ -371,7 +371,7 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly customElements: CustomElementRegistry;
 	public readonly history: History;
 	public readonly navigator: Navigator;
-	public readonly console: Console;
+	public readonly console: Omit<Console, 'Console'>;
 	public readonly self = this;
 	public readonly top = this;
 	public readonly parent = this;

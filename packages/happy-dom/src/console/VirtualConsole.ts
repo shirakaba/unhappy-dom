@@ -2,18 +2,13 @@ import IVirtualConsolePrinter from './types/IVirtualConsolePrinter.js';
 import VirtualConsoleLogLevelEnum from './enums/VirtualConsoleLogLevelEnum.js';
 import VirtualConsoleLogTypeEnum from './enums/VirtualConsoleLogTypeEnum.js';
 import IVirtualConsoleLogGroup from './types/IVirtualConsoleLogGroup.js';
-import { ConsoleConstructor } from 'console';
 
 /**
  * Virtual Console.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Console
  */
-export default class VirtualConsole implements Console {
-	// This is needed as the interface for the NodeJS Console also have a reference to the ConsoleConstructor class as a property for some reason.
-	// This is not part of the browser specs.
-	public Console: ConsoleConstructor;
-
+export default class VirtualConsole implements Omit<Console, 'Console'> {
 	private _printer: IVirtualConsolePrinter;
 	private _count: { [label: string]: number } = {};
 	private _time: { [label: string]: number } = {};

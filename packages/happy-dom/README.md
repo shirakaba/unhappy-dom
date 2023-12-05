@@ -40,6 +40,7 @@ For unhappy-dom, we remove:
 - All form-related elements
 - DataTransfer (therefore also Blob)
 - Clipboard
+- References to the Node.js Console
 - VM
 - XHR
 - v8 methods like gc()

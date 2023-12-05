@@ -310,7 +310,7 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly customElements: CustomElementRegistry;
 	readonly history: History;
 	readonly navigator: Navigator;
-	readonly console: Console;
+	readonly console: Omit<Console, 'Console'>;
 	readonly self: IWindow;
 	readonly top: IWindow;
 	readonly parent: IWindow;
