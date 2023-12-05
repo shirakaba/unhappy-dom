@@ -86,7 +86,6 @@ import IElement from '../nodes/element/IElement.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
 import IHappyDOMSettings from './IHappyDOMSettings.js';
 import Stream from 'stream';
-import { webcrypto } from 'crypto';
 import INodeJSGlobal from './INodeJSGlobal.js';
 import VirtualConsolePrinter from '../console/VirtualConsolePrinter.js';
 import Permissions from '../permissions/Permissions.js';
@@ -331,7 +330,6 @@ export default interface IWindow extends IEventTarget, INodeJSGlobal {
 	readonly pageYOffset: number;
 	readonly scrollX: number;
 	readonly scrollY: number;
-	readonly crypto: typeof webcrypto;
 
 	/**
 	 * Returns an object containing the values of all CSS properties of an element.

@@ -81,7 +81,6 @@ import Plugin from '../navigator/Plugin.js';
 import PluginArray from '../navigator/PluginArray.js';
 import RangeImplementation from '../range/Range.js';
 import DOMRect from '../nodes/element/DOMRect.js';
-import { webcrypto } from 'crypto';
 import Base64 from '../base64/Base64.js';
 import IDocument from '../nodes/document/IDocument.js';
 import Attr from '../nodes/attr/Attr.js';
@@ -390,7 +389,6 @@ export default class Window extends EventTarget implements IWindow {
 	public readonly innerHeight: number = 768;
 	public readonly outerWidth: number = 1024;
 	public readonly outerHeight: number = 768;
-	public readonly crypto = webcrypto;
 
 	// Node.js Globals
 	public Array: typeof Array;
