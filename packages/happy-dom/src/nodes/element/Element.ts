@@ -881,14 +881,7 @@ export default class Element extends Node implements IElement {
 	public scroll(x: { top?: number; left?: number; behavior?: string } | number, y?: number): void {
 		if (typeof x === 'object') {
 			if (x.behavior === 'smooth') {
-				setTimeout(() => {
-					if (x.top !== undefined) {
-						(<number>this.scrollTop) = x.top;
-					}
-					if (x.left !== undefined) {
-						(<number>this.scrollLeft) = x.left;
-					}
-				});
+				throw new Error('Element.scroll({ behavior: "smooth" }) is not supported.');
 			} else {
 				if (x.top !== undefined) {
 					(<number>this.scrollTop) = x.top;
